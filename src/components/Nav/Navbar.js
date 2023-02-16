@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   createStyles,
-  Header,
   Container,
   Group,
   Burger,
@@ -101,6 +100,10 @@ export default function HeaderResponsive({ children }) {
     {
       link: "/",
       label: "Home",
+    },
+    {
+      link: "/services",
+      label: "Service",
     },
     {
       link: "/blog",
