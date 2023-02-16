@@ -19,5 +19,8 @@ module.exports = withPlugins(
       return config;
     },
     reactStrictMode: true,
+    images: {
+      unoptimized: true,
+    },
   })
 );
