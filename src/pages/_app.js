@@ -1,18 +1,9 @@
-// import '@/styles/globals.css'
-import Head from "next/head";
+import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import { MantineProvider } from "@mantine/core";
 
 export default function App({ Component, pageProps }) {
   return (
     <>
-      <Head>
-        <title>Page title</title>
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
-
       <MantineProvider
         withGlobalStyles
         withNormalizeCSS
@@ -21,6 +12,11 @@ export default function App({ Component, pageProps }) {
         }}
       >
         <Component {...pageProps} />
+        <TawkMessengerReact
+          propertyId="62aead82b0d10b6f3e78139d"
+          widgetId="1g5t5bhl4"
+          onLoad={() => console.log("loading")}
+        />
       </MantineProvider>
     </>
   );

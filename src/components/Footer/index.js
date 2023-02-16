@@ -1,4 +1,5 @@
 import { createStyles, Text, Container } from "@mantine/core";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -106,20 +107,12 @@ const mock = [
     title: "About",
     links: [
       {
-        label: "Features",
-        link: "#",
+        label: "Services",
+        link: "/services",
       },
       {
-        label: "Pricing",
-        link: "#",
-      },
-      {
-        label: "Support",
-        link: "#",
-      },
-      {
-        label: "Forums",
-        link: "#",
+        label: "Blog",
+        link: "/blog",
       },
     ],
   },
@@ -128,19 +121,19 @@ const mock = [
     links: [
       {
         label: "Contribute",
-        link: "#",
+        link: "/",
       },
       {
         label: "Media assets",
-        link: "#",
+        link: "/",
       },
       {
         label: "Changelog",
-        link: "#",
+        link: "/",
       },
       {
         label: "Releases",
-        link: "#",
+        link: "/",
       },
     ],
   },
@@ -148,20 +141,24 @@ const mock = [
     title: "Community",
     links: [
       {
-        label: "Join Discord",
-        link: "#",
+        label: "Facebook",
+        link: "https://www.facebook.com/carigaar57",
       },
       {
-        label: "Follow on Twitter",
-        link: "#",
+        label: "Twitter",
+        link: "https://twitter.com/dhanrhak",
       },
       {
-        label: "Email newsletter",
-        link: "#",
+        label: "LinkedIn",
+        link: "https://www.linkedin.com/company/carigaar/?viewAsMember=true",
       },
       {
-        label: "GitHub discussions",
-        link: "#",
+        label: "TikTok",
+        link: "https://www.tiktok.com/@carigaar.com?lang=en",
+      },
+      {
+        label: "Instagram",
+        link: "https://www.instagram.com/carigaar/",
       },
     ],
   },
@@ -172,14 +169,8 @@ export default function Footer({ data = mock }) {
 
   const groups = data.map((group) => {
     const links = group.links.map((link, index) => (
-      <Text
-        key={index}
-        className={classes.link}
-        component="a"
-        href={link.link}
-        onClick={(event) => event.preventDefault()}
-      >
-        {link.label}
+      <Text key={index} className={classes.link}>
+        <Link href={link.link}>{link.label}</Link>
       </Text>
     ));
 

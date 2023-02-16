@@ -10,6 +10,7 @@ import {
   Title,
 } from "@mantine/core";
 import axios from "axios";
+import SEO from "@/components/Seo";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -59,6 +60,7 @@ function Services() {
   }, []);
   return (
     <Container className={classes.wrapper}>
+      <SEO />
       <Title className={classes.title}>Featured Categories</Title>
       <SimpleGrid
         cols={8}
