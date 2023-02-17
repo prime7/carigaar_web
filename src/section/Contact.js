@@ -74,9 +74,8 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const MOCKDATA = [
-  { title: "Email", description: "hello@mantine.dev" },
-  { title: "Phone", description: "+49 (800) 335 35 35" },
-  { title: "Address", description: "844 Morris Park avenue" },
+  { title: "Email", description: "support@carigaar.com" },
+  { title: "Address", description: "777 Hornby Street" },
   { title: "Working hours", description: "8 a.m. – 11 p.m." },
 ];
 

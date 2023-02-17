@@ -14,11 +14,6 @@ const useStyles = createStyles((theme) => ({
     },
   },
 
-  inner: {
-    position: "relative",
-    zIndex: 1,
-  },
-
   dots: {
     position: "absolute",
     color:
@@ -86,7 +81,7 @@ export default function HeroText() {
       <Dots className={classes.dots} style={{ left: 0, top: 140 }} />
       <Dots className={classes.dots} style={{ right: 0, top: 60 }} />
 
-      <div className={classes.inner}>
+      <div>
         <Title className={classes.title}>
           Let us do{" "}
           <Text component="span" className={classes.highlight} inherit>

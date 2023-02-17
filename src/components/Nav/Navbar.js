@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   createStyles,
   Container,
@@ -11,20 +11,20 @@ import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "../Footer";
+import { useRouter } from "next/router";
 
 const HEADER_HEIGHT = 60;
 
 const useStyles = createStyles((theme) => ({
   root: {
+    position: "relative",
+    zIndex: 1,
     paddingTop: theme.spacing.sm,
     paddingBottom: theme.spacing.sm,
     backgroundColor: theme.fn.variant({
       variant: "filled",
       color: theme.primaryColor,
     }).background,
-    borderBottom: `1px solid ${
-      theme.colorScheme === "dark" ? "transparent" : theme.colors.gray[2]
-    }`,
   },
 
   dropdown: {
@@ -68,13 +68,18 @@ const useStyles = createStyles((theme) => ({
     padding: "8px 12px",
     borderRadius: theme.radius.sm,
     textDecoration: "none",
-    color: theme.colors[theme.primaryColor][0],
+    color:
+      theme.colorScheme === "dark"
+        ? theme.colors.dark[0]
+        : theme.colors.primaryColor,
     fontSize: theme.fontSizes.sm,
     fontWeight: 500,
 
     "&:hover": {
-      color: theme.white,
-      textDecoration: "none",
+      backgroundColor:
+        theme.colorScheme === "dark"
+          ? theme.colors.dark[6]
+          : theme.colors.gray[0],
     },
 
     [theme.fn.smallerThan("sm")]: {
@@ -85,12 +90,12 @@ const useStyles = createStyles((theme) => ({
 
   linkActive: {
     "&, &:hover": {
-      color: theme.white,
-      opacity: 1,
-      borderBottomColor:
-        theme.colorScheme === "dark"
-          ? theme.white
-          : theme.colors[theme.primaryColor][5],
+      backgroundColor: theme.fn.variant({
+        variant: "light",
+        color: theme.primaryColor,
+      }).background,
+      color: theme.fn.variant({ variant: "light", color: theme.primaryColor })
+        .color,
     },
   },
 }));
@@ -113,7 +118,10 @@ export default function HeaderResponsive({ children }) {
   const [opened, { toggle, close }] = useDisclosure(false);
   const [active, setActive] = useState(links[0].link);
   const { classes, cx } = useStyles();
-
+  const router = useRouter();
+  useEffect(() => {
+    setActive(router.asPath);
+  }, [router.asPath]);
   const items = links.map((link) => (
     <Link
       key={link.label}
