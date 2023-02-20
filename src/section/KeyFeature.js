@@ -13,18 +13,43 @@ import Image from "next/image";
 const mockdata = [
   {
     title: "Better reach",
-    description: "Expand your reach and find new clients.",
+    description: "stop fighting for the same key words",
     icon: "KeyFeature/editing.svg",
   },
   {
     title: "Showcase expertise",
-    description: "Showcase Your Expertise And Work Through Our Platform.",
+    description: "stop wasting money in SEO",
     icon: "KeyFeature/speed.svg",
   },
   {
     title: "Expand your business",
-    description: "Make Connections And Expand Your Business To New Horizons.",
+    description: "no need to do sponsored ads",
     icon: "KeyFeature/vector.svg",
+  },
+  {
+    title: "Expand your business",
+    description: "no need to hire any marketing peoples",
+    icon: "KeyFeature/editing.svg",
+  },
+  {
+    title: "Expand your business",
+    description: "stop wasting money on fancy website",
+    icon: "KeyFeature/speed.svg",
+  },
+  {
+    title: "Expand your business",
+    description: "get more views",
+    icon: "KeyFeature/vector.svg",
+  },
+  {
+    title: "Expand your business",
+    description: "get connected with potential customers in your locality",
+    icon: "KeyFeature/editing.svg",
+  },
+  {
+    title: "Expand your business",
+    description: "simple, easy to use & most affordable",
+    icon: "KeyFeature/speed.svg",
   },
 ];
 
@@ -69,6 +94,14 @@ const useStyles = createStyles((theme) => ({
       marginTop: theme.spacing.sm,
     },
   },
+  content: {
+    margin: "auto",
+    maxWidth: 600,
+  },
+  highlight: {
+    color:
+      theme.colors[theme.primaryColor][theme.colorScheme === "dark" ? 4 : 6],
+  },
 }));
 
 export default function KeyFeature() {
@@ -91,11 +124,11 @@ export default function KeyFeature() {
         height={50}
       />
       <Text size="lg" weight={500} className={classes.cardTitle} mt="md">
-        {feature.title}
-      </Text>
-      <Text size="sm" color="dimmed" mt="sm">
         {feature.description}
       </Text>
+      {/* <Text size="sm" color="dimmed" mt="sm">
+        {feature.description}
+      </Text> */}
     </Card>
   ));
   return (
@@ -116,7 +149,8 @@ export default function KeyFeature() {
         align="center"
         mt="md"
       >
-        Join carigaar and stop worrying about managing your clients
+        Small business owners just join Carigaar and stop worrying about
+        managing your business and clients.
       </Text>
 
       <SimpleGrid
@@ -127,6 +161,15 @@ export default function KeyFeature() {
       >
         {features}
       </SimpleGrid>
+      <Text color="dimmed" className={classes.content} align="center" mt="md">
+        Carigaar will also help small business owners to promote and reach their
+        potential customers for FREE. The Carigaar app will also help small
+        businessowners to list their business, showcase their skills, promote
+        their services/products & reach potential customers. All for FREE.
+        <Text component="span" className={classes.highlight} inherit>
+          Get started today by downloading our iOS or Android app!
+        </Text>{" "}
+      </Text>
     </Container>
   );
 }

@@ -75,8 +75,7 @@ const useStyles = createStyles((theme) => ({
 
 const MOCKDATA = [
   { title: "Email", description: "support@carigaar.com" },
-  { title: "Address", description: "777 Hornby Street" },
-  { title: "Working hours", description: "8 a.m. – 11 p.m." },
+  { title: "Address", description: "777 Hornby Street Vancouver, Canada" },
 ];
 
 export default function ContactUs() {

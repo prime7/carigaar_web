@@ -1,5 +1,5 @@
 import { Dots } from "@/components/Dots";
-import { createStyles, Title, Text, Button, Container } from "@mantine/core";
+import { createStyles, Title, Text, Container, List } from "@mantine/core";
 import Image from "next/image";
 
 const useStyles = createStyles((theme) => ({
@@ -83,19 +83,43 @@ export default function HeroText() {
 
       <div>
         <Title className={classes.title}>
-          Let us do{" "}
+          Find exactly{" "}
           <Text component="span" className={classes.highlight} inherit>
-            the work
+            what you are looking for
           </Text>{" "}
-          for you
         </Title>
 
-        <Container p={0} size={600}>
+        <Container
+          p={0}
+          size={600}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <Text size="lg" color="dimmed" className={classes.description}>
-            Our mobile platform will help connect you to either the small
-            business or clients that you are looking for. Get started today by
-            downloading our iOS or Android app!
+            Carigaar will help you find the businesses in your local community
+            to solve all your problems.
           </Text>
+
+          <List
+            spacing="xs"
+            size="sm"
+            center
+            icon={
+              <Image
+                src="list-highlight.svg"
+                alt="icon"
+                height={50}
+                width={50}
+              />
+            }
+          >
+            <List.Item>Tons of variety</List.Item>
+            <List.Item>faster search</List.Item>
+            <List.Item>filter your needs</List.Item>
+          </List>
         </Container>
 
         <div className={classes.controls}>

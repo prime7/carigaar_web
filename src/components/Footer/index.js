@@ -104,7 +104,7 @@ const useStyles = createStyles((theme) => ({
 
 const mock = [
   {
-    title: "About",
+    title: "Pages",
     links: [
       {
         label: "Services",
@@ -113,6 +113,10 @@ const mock = [
       {
         label: "Blog",
         link: "/blog",
+      },
+      {
+        label: "About Us",
+        link: "/about",
       },
     ],
   },
@@ -159,6 +163,10 @@ const mock = [
       {
         label: "Instagram",
         link: "https://www.instagram.com/carigaar/",
+      },
+      {
+        label: "Youtube",
+        link: "https://www.youtube.com/@carigaar",
       },
     ],
   },
