@@ -111,6 +111,10 @@ export default function HeaderResponsive({ children }) {
       label: "Service",
     },
     {
+      link: "/local",
+      label: "Local News",
+    },
+    {
       link: "/blog",
       label: "Blog",
     },
