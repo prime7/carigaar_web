@@ -7,8 +7,10 @@ import {
   Card,
   SimpleGrid,
   Container,
+  Button,
 } from "@mantine/core";
 import Image from "next/image";
+import Link from "next/link";
 
 const mockdata = [
   {
@@ -102,6 +104,13 @@ const useStyles = createStyles((theme) => ({
     color:
       theme.colors[theme.primaryColor][theme.colorScheme === "dark" ? 4 : 6],
   },
+  apply: {
+    margin: "auto",
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: theme.spacing.xl * 5,
+    textDecoration: "none",
+  },
 }));
 
 export default function KeyFeature() {
@@ -133,6 +142,15 @@ export default function KeyFeature() {
   ));
   return (
     <Container size="lg" py="xl">
+      <Link href="/apply" className={classes.apply}>
+        <Button
+          variant="gradient"
+          gradient={{ from: "teal", to: "blue", deg: 60 }}
+        >
+          What do you need done?
+        </Button>
+      </Link>
+
       <Group position="center">
         <Badge variant="filled" size="lg">
           Become a Carigaar
