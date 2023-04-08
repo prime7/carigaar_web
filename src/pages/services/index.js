@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import withNavbarContainer from "@/components/Nav";
 import {
+  Button,
   Card,
   Container,
   createStyles,
@@ -11,6 +12,7 @@ import {
 } from "@mantine/core";
 import axios from "axios";
 import SEO from "@/components/Seo";
+import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -43,6 +45,21 @@ const useStyles = createStyles((theme) => ({
     "&:hover": {
       boxShadow: `${theme.shadows.md} !important`,
       transform: "scale(1.05)",
+    },
+  },
+  apply: {
+    margin: "auto",
+    display: "flex",
+    justifyContent: "center",
+    margin: theme.spacing.xl * 3,
+    textDecoration: "none",
+  },
+  controls: {
+    display: "flex",
+    justifyContent: "center",
+
+    "@media (max-width: 720px)": {
+      flexDirection: "column",
     },
   },
 }));
@@ -89,6 +106,37 @@ function Services() {
           </Card>
         ))}
       </SimpleGrid>
+      <Link href="/apply" className={classes.apply}>
+        <Button
+          variant="gradient"
+          gradient={{ from: "teal", to: "blue", deg: 60 }}
+        >
+          What do you need done?
+        </Button>
+      </Link>
+      <div className={classes.controls}>
+        <a href="https://play.google.com/store/apps/details?id=com.carigaar.app">
+          <Image
+            src="/play.svg"
+            width="150"
+            height="60"
+            alt="Get it on Play store"
+            border="0"
+            style={{
+              marginRight: 20,
+            }}
+          />
+        </a>
+        <a href="https://apps.apple.com/ca/app/carigaar/id1589623263">
+          <Image
+            src="/apple.svg"
+            width="150"
+            height="60"
+            alt="Get it on Apple store"
+            border="0"
+          />
+        </a>
+      </div>
     </Container>
   );
 }
