@@ -1,18 +1,15 @@
 import React from "react";
-import MDX from "@mdx-js/runtime";
 import Link from "next/link";
 import Image from "next/image";
-import { Text, Flex, Title } from "@mantine/core";
+import { Flex, Title } from "@mantine/core";
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 
 const PostDetail = ({ post }) => {
-  const components = {
-    Image: (props) => <Image {...props} width="600" height="400" alt="asd" />,
-  };
   return (
     <article style={{ marginBottom: "50px", marginTop: "50px" }}>
       <Flex wrap="wrap" gap="xs">
         <Image
-          src={post.cover_image}
+          src={post.cover.fields.file.url}
           width={800}
           height={400}
           alt="Banner image"
@@ -21,8 +18,7 @@ const PostDetail = ({ post }) => {
           {post.title} - {post.date}
         </Title>
       </Flex>
-
-      <MDX components={components}>{post.content}</MDX>
+      {documentToReactComponents(post.content)}
       <Flex justify="space-between">
         <Link href="/blog" passHref>
           Back to blog list

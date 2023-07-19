@@ -1,4 +1,4 @@
-import { getAllLocals } from "@/api";
+import { client } from "@/api";
 import Locals from "@/components/Blog/Locals";
 import withNavbarContainer from "@/components/Nav";
 import SEO from "@/components/Seo";
@@ -23,8 +23,10 @@ function LocalNews({ locals }) {
   );
 }
 export async function getStaticProps() {
-  const locals = getAllLocals();
-  return { props: { locals } };
+  const entries = await client.getEntries({
+    content_type: "local",
+  });
+  return { props: { locals: entries.items } };
 }
 
 export default withNavbarContainer(LocalNews);

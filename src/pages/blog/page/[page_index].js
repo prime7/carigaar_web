@@ -1,5 +1,5 @@
 import React from "react";
-import { getAllPosts, getPostSlugs } from "@/api";
+import { client } from "@/api";
 import withNavbarContainer from "@/components/Nav";
 import Posts from "@/components/Blog/Posts";
 import SEO from "@/components/Seo";
@@ -33,9 +33,11 @@ function BlogPage({ posts, numPages }) {
 }
 
 export async function getStaticPaths() {
-  const posts = getPostSlugs();
+  const posts = await client.getEntries({
+    content_type: "blogPost",
+  });
 
-  const numPages = Math.ceil(posts.length / 6);
+  const numPages = Math.ceil(posts.items.length / 6);
   let paths = [];
 
   for (let i = 1; i <= numPages; i++) {
@@ -52,18 +54,18 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const page = parseInt((params && params.page_index) || 1);
-  const files = getPostSlugs();
 
-  const posts = getAllPosts(["title", "slug", "cover_image", "date", "author"]);
-  const numPages = Math.ceil(files.length / 6);
-  const pageIndex = page - 1;
-  const orderedPosts = posts.slice(pageIndex * 6, (pageIndex + 1) * 6);
+  const entries = await client.getEntries({
+    content_type: "blogPost",
+    skip: page * 6 - 6,
+    limit: 6,
+  });
+  const blogPosts = entries.items.map((entry) => entry.fields);
 
   return {
     props: {
-      posts: orderedPosts,
-      numPages,
-      currentPage: page,
+      posts: blogPosts,
+      numPages: Math.ceil(10 / 6),
     },
   };
 }

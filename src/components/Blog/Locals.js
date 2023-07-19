@@ -33,9 +33,9 @@ export default function Locals({ locals }) {
     >
       {locals.map((local) => (
         <Card
-          key={local.slug}
+          key={local.fields.slug}
           component={Link}
-          href={`/local/${local.slug}`}
+          href={`/local/${local.fields.slug}`}
           shadow="sm"
           className={classes.card}
           withBorder
@@ -47,11 +47,11 @@ export default function Locals({ locals }) {
             weight={700}
             mt="md"
           >
-            {local.data.date}
+            {local.fields.date}
           </Text>
 
           <Text className={classes.title} mt={5}>
-            {local.data.title}
+            {local.fields.title}
           </Text>
         </Card>
       ))}

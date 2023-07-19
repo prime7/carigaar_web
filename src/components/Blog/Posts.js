@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Card,
-  SimpleGrid,
-  Text,
-  createStyles,
-  Image,
-  Badge,
-} from "@mantine/core";
+import { Card, SimpleGrid, Text, createStyles, Image } from "@mantine/core";
 import Link from "next/link";
 
 const useStyles = createStyles((theme) => ({
@@ -63,8 +56,8 @@ export default function Posts({ posts }) {
         >
           <Card.Section>
             <Image
-              src={post.cover_image}
-              alt="Cover image"
+              src={post.cover.fields.file.url}
+              alt={post.cover.fields.title}
               fill="true"
               height={130}
             />
@@ -84,10 +77,7 @@ export default function Posts({ posts }) {
             {post.title}
           </Text>
           <Card.Section className={classes.author}>
-            <Text>{post.author.name}</Text>
-            <Text size="xs" color="dimmed">
-              {post.author.description}
-            </Text>
+            <Text>{post.author}</Text>
           </Card.Section>
         </Card>
       ))}
