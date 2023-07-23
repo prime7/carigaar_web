@@ -55,17 +55,18 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const page = parseInt((params && params.page_index) || 1);
 
-  const entries = await client.getEntries({
+  const { total, items } = await client.getEntries({
     content_type: "blogPost",
     skip: page * 6 - 6,
     limit: 6,
   });
-  const blogPosts = entries.items.map((entry) => entry.fields);
+
+  const blogPosts = items.map((entry) => entry.fields);
 
   return {
     props: {
       posts: blogPosts,
-      numPages: Math.ceil(10 / 6),
+      numPages: Math.ceil(total / 6),
     },
   };
 }
