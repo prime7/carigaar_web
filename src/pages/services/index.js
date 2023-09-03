@@ -13,6 +13,7 @@ import {
 import axios from "axios";
 import SEO from "@/components/Seo";
 import Link from "next/link";
+import ContactUs from "@/section/Contact";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -57,6 +58,7 @@ const useStyles = createStyles((theme) => ({
   controls: {
     display: "flex",
     justifyContent: "center",
+    marginBottom: "50px",
 
     "@media (max-width: 720px)": {
       flexDirection: "column",
@@ -111,9 +113,12 @@ function Services() {
           variant="gradient"
           gradient={{ from: "teal", to: "blue", deg: 60 }}
         >
-          What do you need done?
+          Order/Book Now
         </Button>
       </Link>
+      <Title order={2} className={classes.title} ta="center" mt="sm">
+        Catigaar New Version coming soon
+      </Title>
       <div className={classes.controls}>
         <a href="https://play.google.com/store/apps/details?id=com.carigaar.app">
           <Image
@@ -137,6 +142,7 @@ function Services() {
           />
         </a>
       </div>
+      <ContactUs />
     </Container>
   );
 }

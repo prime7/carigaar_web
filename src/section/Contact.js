@@ -90,7 +90,7 @@ export default function ContactUs() {
           breakpoints={[{ maxWidth: "sm", cols: 1 }]}
         >
           <div>
-            <Title className={classes.title}>Contact us</Title>
+            <Title className={classes.title}>Contact us or Pre-signup</Title>
             <Text className={classes.description} mt="sm" mb={30}>
               Leave your email and we will get back to you within 24 hours
             </Text>
