@@ -117,7 +117,7 @@ function Services() {
         </Button>
       </Link>
       <Title order={2} className={classes.title} ta="center" mt="sm">
-        Catigaar New Version coming soon
+        Carigaar New Version coming soon
       </Title>
       <div className={classes.controls}>
         <a href="https://play.google.com/store/apps/details?id=com.carigaar.app">
