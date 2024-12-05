@@ -1,41 +1,40 @@
-import withNavbarContainer from "@/components/Nav";
-import SEO from "@/components/Seo";
-import {
-  Container,
-  createStyles,
-  Text,
-  Select,
-  Box,
-  TextInput,
-  Group,
-  Button,
-} from "@mantine/core";
 import React, { useEffect, useState } from "react";
+import { 
+  Container, 
+  TextInput, 
+  Select, 
+  Button, 
+  Box, 
+  Title, 
+  Text, 
+  Stack, 
+  Paper,
+  Group
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import axios from "axios";
+import withNavbarContainer from "@/components/Nav";
+import SEO from "@/components/Seo";
 
-const useStyles = createStyles((theme) => ({
-  wrapper: {
-    paddingTop: theme.spacing.xl * 2,
-    paddingBottom: theme.spacing.xl * 2,
-    display: "flex",
-    flexDirection: "column",
-    gap: theme.spacing.xl,
-    textAlign: "center",
-  },
-  title: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 900,
-    marginBottom: theme.spacing.md,
+const serviceList = [
+  "Moving & Delivery",
+  "Plumbing",
+  "Painting",
+  "Janitorial",
+  "Device Repair",
+  "Carpenter",
+  "Technology",
+  "Maintenance",
+  "Handyman",
+  "Car Repair",
+  "Financials",
+  "Real Estate",
+  "Tiffin Service & Catering",
+  "Contractor",
+  "Events"
+];
 
-    [theme.fn.smallerThan("sm")]: {
-      fontSize: 28,
-      textAlign: "left",
-    },
-  },
-}));
-function AboutUs() {
-  const { classes } = useStyles();
+function ApplyPage() {
   const form = useForm({
     initialValues: {
       name: "",
@@ -43,84 +42,132 @@ function AboutUs() {
       phone: "",
       address: "",
       details: "",
-      categories: 0,
+      categories: "",
     },
 
     validate: {
+      name: (value) => value.trim().length < 2 ? 'Name must be at least 2 characters' : null,
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+      phone: (value) => (/^\+?[0-9]{10,14}$/.test(value) ? null : "Invalid phone number"),
+      address: (value) => value.trim().length < 5 ? 'Address is required' : null,
+      categories: (value) => value ? null : "Please select a service",
     },
   });
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    axios.get("https://carigaar.ca/api/category/").then((res) => {
-      const d = res.data.map((item) => ({
-        label: item.name,
-        value: item.id,
-      }));
-      setCategories(d);
-    });
-  }, []);
-  return (
-    <Container className={classes.wrapper}>
-      <SEO title="About carigaar" />
-      <Text className={classes.title}>
-        Find a CARIGAAR and get your work done
-      </Text>
-      <Box maw={600} mx="auto">
-        <form
-          onSubmit={form.onSubmit((values) => {
-            axios
-              .post("https://carigaar.ca/api/typo-form/", values)
-              .then((response) => console.log(response))
-              .catch((error) => console.log(error));
-            form.reset();
-          })}
-        >
-          <Select
-            label=" What do you need done?"
-            placeholder="Pick one"
-            searchable
-            data={categories}
-            {...form.getInputProps("categories")}
-          />
-          <TextInput
-            withAsterisk
-            label="Name"
-            placeholder="John Doe"
-            {...form.getInputProps("name")}
-          />
-          <TextInput
-            withAsterisk
-            label="Email"
-            placeholder="your@email.com"
-            {...form.getInputProps("email")}
-          />
-          <TextInput
-            withAsterisk
-            label="Phone"
-            placeholder="+188888888"
-            {...form.getInputProps("phone")}
-          />
-          <TextInput
-            withAsterisk
-            label="Address"
-            placeholder="your address"
-            {...form.getInputProps("address")}
-          />
-          <TextInput
-            withAsterisk
-            label="Details"
-            placeholder="Details about the service"
-            {...form.getInputProps("details")}
-          />
 
-          <Group position="right" mt="md">
-            <Button type="submit">Submit</Button>
-          </Group>
-        </form>
-      </Box>
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const formattedCategories = serviceList.map((service) => ({
+      label: service,
+      value: service,
+    }));
+    setCategories(formattedCategories);
+  }, []);
+
+  const handleSubmit = async (values) => {
+    try {
+      const response = await axios.post("/api/email", values);
+      console.log(response);
+      form.reset();
+      // Consider adding a success notification
+    } catch (error) {
+      console.error(error);
+      // Consider adding an error notification
+    }
+  };
+
+  return (
+    <Container size="sm" py="xl">
+      <SEO title="Apply for Carigaar Service" />
+      
+      <Paper 
+        shadow="md" 
+        radius="lg" 
+        withBorder 
+        p="xl"
+      >
+        <Stack gap="lg" align="stretch">
+          <Box ta="center">
+            <Title 
+              order={1} 
+              mb="xs"
+              style={{ 
+                color: '#2c3e50', 
+                fontWeight: 700 
+              }}
+            >
+              Get Your Work Done
+            </Title>
+            <Text 
+              c="dimmed" 
+              size="md" 
+              mb="lg"
+            >
+              Fill out the form below and we'll connect you with the right Carigaar
+            </Text>
+          </Box>
+
+          <form onSubmit={form.onSubmit(handleSubmit)}>
+            <Stack gap="md">
+              <Select
+                label="Service Needed"
+                placeholder="Select a service"
+                data={categories}
+                searchable
+                {...form.getInputProps("categories")}
+              />
+
+              <TextInput
+                label="Full Name"
+                placeholder="Enter your full name"
+                withAsterisk
+                {...form.getInputProps("name")}
+              />
+
+              <TextInput
+                label="Email Address"
+                placeholder="your@email.com"
+                withAsterisk
+                {...form.getInputProps("email")}
+              />
+
+              <TextInput
+                label="Phone Number"
+                placeholder="+1 (555) 123-4567"
+                withAsterisk
+                {...form.getInputProps("phone")}
+              />
+
+              <TextInput
+                label="Address"
+                placeholder="Enter your full address"
+                withAsterisk
+                {...form.getInputProps("address")}
+              />
+
+              <TextInput
+                label="Service Details"
+                placeholder="Provide specific details about the service you need"
+                {...form.getInputProps("details")}
+              />
+
+              <Group justify="center" mt="md">
+                <Button 
+                  type="submit" 
+                  variant="gradient"
+                  gradient={{ from: '#2c3e50', to: '#3498db', deg: 45 }}
+                  size="md"
+                >
+                  Submit Request
+                </Button>
+              </Group>
+            </Stack>
+          </form>
+        </Stack>
+      </Paper>
     </Container>
   );
 }
 
-export default withNavbarContainer(AboutUs);
+export default withNavbarContainer(ApplyPage);
+

@@ -1,148 +1,133 @@
-import React, { useEffect, useState } from "react";
-import withNavbarContainer from "@/components/Nav";
-import {
-  Button,
-  Card,
-  Container,
-  createStyles,
-  Image,
-  SimpleGrid,
-  Text,
-  Title,
+import React from "react";
+import { 
+  Container, 
+  SimpleGrid, 
+  Card, 
+  Title, 
+  Text, 
+  Button, 
+  Group, 
+  Box 
 } from "@mantine/core";
-import axios from "axios";
+import withNavbarContainer from "@/components/Nav";
 import SEO from "@/components/Seo";
 import Link from "next/link";
 import ContactUs from "@/section/Contact";
 
-const useStyles = createStyles((theme) => ({
-  wrapper: {
-    paddingTop: theme.spacing.xl * 2,
-    paddingBottom: theme.spacing.xl * 2,
-  },
-  title: {
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontWeight: 900,
-    marginBottom: theme.spacing.md,
-    textAlign: "center",
-
-    [theme.fn.smallerThan("sm")]: {
-      fontSize: 28,
-      textAlign: "left",
-    },
-  },
-  image: {
-    maxWidth: "30%",
-  },
-  card: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor:
-      theme.colorScheme === "dark" ? theme.colors.dark[7] : theme.white,
-    transition: "box-shadow 150ms ease, transform 100ms ease",
-
-    "&:hover": {
-      boxShadow: `${theme.shadows.md} !important`,
-      transform: "scale(1.05)",
-    },
-  },
-  apply: {
-    margin: "auto",
-    display: "flex",
-    justifyContent: "center",
-    margin: theme.spacing.xl * 3,
-    textDecoration: "none",
-  },
-  controls: {
-    display: "flex",
-    justifyContent: "center",
-    marginBottom: "50px",
-
-    "@media (max-width: 720px)": {
-      flexDirection: "column",
-    },
-  },
-}));
 function Services() {
-  const { classes } = useStyles();
-  const [categories, setCategories] = useState([]);
-  useEffect(() => {
-    axios.get("https://carigaar.ca/api/category/").then((res) => {
-      setCategories(
-        res.data
-          .filter((item) => item.featured === true)
-          .filter((val, i) => i < 16) // limiting by 16
-      );
-    });
-  }, []);
-  return (
-    <Container className={classes.wrapper}>
-      <SEO />
-      <Title className={classes.title}>Featured Categories</Title>
-      <SimpleGrid
-        cols={8}
-        breakpoints={[
-          { maxWidth: "lg", cols: 8, spacing: "lg" },
-          { maxWidth: "md", cols: 4, spacing: "md" },
-          { maxWidth: "sm", cols: 2, spacing: "sm" },
-        ]}
-      >
-        {categories.map((category) => (
-          <Card
-            key={category.id}
-            withBorder
-            radius="md"
-            className={classes.card}
-          >
-            <Image
-              className={classes.image}
-              src={category.image}
-              alt={category.name}
-            />
+  const serviceList = [
+    "Moving & Delivery",
+    "Plumbing",
+    "Painting",
+    "Janitorial",
+    "Device Repair",
+    "Carpenter",
+    "Technology",
+    "Maintenance",
+    "Handyman",
+    "Car Repair",
+    "Financials",
+    "Real Estate",
+    "Tiffin Service & Catering",
+    "Contractor",
+    "Events"
+  ];
 
-            <Text size="xs" mt={7}>
-              {category.name}
+  return (
+    <Container size="lg" py="xl">
+      <SEO />
+      
+      <Box ta="center" mb="xl">
+        <Title 
+          order={1} 
+          mb="md" 
+          style={{ 
+            fontWeight: 800, 
+            color: '#2c3e50' 
+          }}
+        >
+          Get All Your Work Done by a Carigaar
+        </Title>
+        
+        <Text 
+          c="dimmed" 
+          size="lg" 
+          mx="auto" 
+          mb="xl"
+          style={{ 
+            maxWidth: 600, 
+            lineHeight: 1.6 
+          }}
+        >
+          A Carigaar is a skilled craftsman who brings expertise and precision 
+          to complete your tasks with professional finesse.
+        </Text>
+      </Box>
+
+      <Title 
+        order={2} 
+        ta="center" 
+        mb="xl"
+        style={{ 
+          fontWeight: 700, 
+          color: '#2c3e50' 
+        }}
+      >
+        Our Services
+      </Title>
+
+      <SimpleGrid 
+        cols={3} 
+        spacing="lg"
+      >
+        {serviceList.map((service) => (
+          <Card 
+            key={service}
+            shadow="sm" 
+            radius="md" 
+            withBorder 
+            padding="lg"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              transition: 'transform 0.2s, box-shadow 0.2s',
+              height: '100%',
+            }}
+            _hover={{
+              transform: 'scale(1.05)',
+              boxShadow: 'md',
+            }}
+          >
+            <Text 
+              fw={600} 
+              ta="center"
+              style={{ 
+                color: '#2c3e50', 
+                width: '100%' 
+              }}
+            >
+              {service}
             </Text>
           </Card>
         ))}
       </SimpleGrid>
-      <Link href="/apply" className={classes.apply}>
-        <Button
-          variant="gradient"
-          gradient={{ from: "teal", to: "blue", deg: 60 }}
-        >
-          Order/Book Now
-        </Button>
-      </Link>
-      <Title order={2} className={classes.title} ta="center" mt="sm">
-        Carigaar New Version coming soon
-      </Title>
-      <div className={classes.controls}>
-        <a href="https://play.google.com/store/apps/details?id=com.carigaar.app">
-          <Image
-            src="/play.svg"
-            width="150"
-            height="60"
-            alt="Get it on Play store"
-            border="0"
-            style={{
-              marginRight: 20,
-            }}
-          />
-        </a>
-        <a href="https://apps.apple.com/ca/app/carigaar/id1589623263">
-          <Image
-            src="/apple.svg"
-            width="150"
-            height="60"
-            alt="Get it on Apple store"
-            border="0"
-          />
-        </a>
-      </div>
-      <ContactUs />
+
+      <Group position="center" mt="xl">
+        <Link href="/apply" style={{ textDecoration: 'none' }}>
+          <Button 
+            variant="gradient" 
+            gradient={{ from: '#2c3e50', to: '#3498db', deg: 45 }}
+            size="lg"
+            radius="md"
+          >
+            Order / Book Now
+          </Button>
+        </Link>
+      </Group>
+      <Box mt="xl">
+        <ContactUs />
+      </Box>
     </Container>
   );
 }
