@@ -103,7 +103,7 @@ function ApplyPage() {
               size="md" 
               mb="lg"
             >
-              Fill out the form below and we'll connect you with the right Carigaar
+              Fill out the form below and we&apos;ll connect you with the right Carigaar
             </Text>
           </Box>
 
