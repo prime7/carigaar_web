@@ -1,19 +1,30 @@
 import nodemailer from 'nodemailer';
 
-export default async function handler(req, res) {
-    if (req.method !== 'POST') {
-        return res.status(405).json({ message: 'Method not allowed' })
+export const handler = async (event, context) => {
+    // Check if method is POST
+    if (event.httpMethod !== 'POST') {
+        return {
+            statusCode: 405,
+            body: JSON.stringify({ message: 'Method not allowed' })
+        }
     }
 
     try {
         console.log('Received email request')
-        console.log('Form data:', req.body)
+        const formData = JSON.parse(event.body)
+        console.log('Form data:', formData)
         
-        await sendEmailWithNodemailer(req.body)
-        return res.status(200).json({ message: 'Request received successfully' })
+        await sendEmailWithNodemailer(formData)
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ message: 'Request received successfully' })
+        }
     } catch (error) {
         console.error('Error processing request:', error)
-        return res.status(500).json({ message: 'Internal server error' })
+        return {
+            statusCode: 500,
+            body: JSON.stringify({ message: 'Internal server error' })
+        }
     }
 }
 
@@ -42,7 +53,7 @@ async function sendEmailWithNodemailer(formData) {
                 <p style="color: #666;">Submitted at: ${new Date().toLocaleString()}</p>
             </div>
         `,
-        text: JSON.stringify(formData, null, 2) // Fallback plain text version
+        text: JSON.stringify(formData, null, 2)
     };
 
     try {
