@@ -66,7 +66,11 @@ function ApplyPage() {
 
   const handleSubmit = async (values) => {
     try {
-      const response = await axios.post("/api/email", values);
+      const apiUrl = process.env.NODE_ENV === 'production'
+      ? '/.netlify/functions/email'
+      : '/api/email';
+
+    const response = await axios.post(apiUrl, values);
       console.log(response);
       form.reset();
       // Consider adding a success notification
