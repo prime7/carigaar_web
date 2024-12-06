@@ -1,2 +1,2 @@
 [functions]
-  directory = "pages/api"
+  directory = "src/pages/api"
