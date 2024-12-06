@@ -28,7 +28,7 @@ async function sendEmailWithNodemailer(formData) {
 
     const mailOptions = {
         from: 'Carigaar <carigaar@gmail.com>',
-        to: 'dhanrhak@gmail.com',
+        to: 'carigaar@gmail.com',
         subject: 'New Form Submission from Website',
         html: `
             <h2>New Form Submission</h2>
